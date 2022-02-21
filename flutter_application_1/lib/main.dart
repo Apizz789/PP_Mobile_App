@@ -13,13 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Prab PLUEM Molie App',
+      title: 'PrabPluem Moblie Application',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.orange,
         fontFamily: 'Raleway',
       ),
-      home: const MyHomePage(title: 'PRAB PLUEM Moblie Application'),
+      home: const MyHomePage(title: 'PrabPluem Moblie Application'),
     );
   }
 }
