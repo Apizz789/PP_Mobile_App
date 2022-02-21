@@ -14,8 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Prab PLUEM Molie App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.orange,
+        fontFamily: 'Raleway',
       ),
       home: const MyHomePage(title: 'PRAB PLUEM Moblie Application'),
     );
@@ -54,10 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(
-              "picture/pic1.jpg",
-              height: 300,
-              width: 300,
+            // Image.asset(
+            //   "picture/pic1.jpg",
+            //   height: 300,
+            //   width: 300,
+            // ),
+            CircleAvatar(
+              backgroundImage: AssetImage('picture/pic1.jpg'),
+              radius: 220,
             ),
             const Text(
               '\n\nPOP ME Please POP Me Now !!! Ahhhhhhhh',
@@ -87,7 +93,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 40.0,
                 width: 200.0,
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _loginBuildPopupDialog(context),
+                    );
+                  },
                   child: Text(
                     'Login',
                     style: TextStyle(
@@ -104,7 +116,13 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 TextButton(
                   style: raisedButtonStyle,
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _registerBuildPopupDialog(context),
+                    );
+                  },
                   child: Text(
                     'Join with us ?',
                     style: TextStyle(
@@ -117,7 +135,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 TextButton(
                   style: raisedButtonStyle,
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _repasswordBuildPopupDialog(context),
+                    );
+                  },
                   child: Text(
                     'Forgot Password ?',
                     style: TextStyle(
@@ -143,4 +167,70 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+Widget _loginBuildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Warring !'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Username or Password is Wrong."),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
+}
+
+Widget _registerBuildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Register !'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Username or Password is Wrong."),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
+}
+
+Widget _repasswordBuildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('RESET your password'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Username or Password is Wrong."),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
 }
