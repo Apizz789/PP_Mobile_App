@@ -1,10 +1,11 @@
-class Profile {
+class Profile{
   String fname;
   String lname;
   String telephone;
   String email;
   String password;
-  String re_password;
+  String repassword;
 
-  Profile({this.fname,this.lname,this.telephone,this.email,this.password,this.re_password});
+  Profile({required this.fname, required this.lname, required this.telephone, 
+  required this.email, required this.password, required this.repassword});
 }

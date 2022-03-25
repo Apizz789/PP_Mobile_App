@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_application_1/Model/Profile.dart';
+// import 'package:form_field_validator/form_field_validator.dart';
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  // const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  
   final formKey = GlobalKey<FormState>();
-  
+  Profile profile = Profile(
+      fname: "",
+      lname: "",
+      telephone: "",
+      email: "",
+      password: "",
+      repassword: "");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +56,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     Text("*Email: ", style: TextStyle(fontSize: 20)),
                     TextFormField(
-                      keyboardType:TextInputType.emailAddress,
+                      keyboardType: TextInputType.emailAddress,
+                      onSaved: (String? email) {
+                        profile.email = email!;
+                      },
                     ),
                     SizedBox(
                       height: 20,
@@ -57,6 +67,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Text("*Password: ", style: TextStyle(fontSize: 20)),
                     TextFormField(
                       obscureText: true,
+                      onSaved: (String? password) {
+                        profile.password = password!;
+                      },
                     ),
                     SizedBox(
                       height: 20,
@@ -64,6 +77,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Text("*Re-Password: ", style: TextStyle(fontSize: 20)),
                     TextFormField(
                       obscureText: true,
+                      onSaved: (String? repassword) {
+                        profile.repassword = repassword!;
+                      },
                     ),
                     SizedBox(
                       height: 20,
@@ -78,7 +94,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               icon: Icon(Icons.add_box_rounded),
                               label: Text("Register Now !",
                                   style: TextStyle(fontSize: 20)),
-                              onPressed: () {},
+                              onPressed: () {
+                                formKey.currentState?.save();
+                                print(
+                                    "email = ${profile.email} password = ${profile.password}");
+                                formKey.currentState?.reset();
+                              },
                             )),
                       ),
                     ),
