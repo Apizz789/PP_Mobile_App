@@ -1,15 +1,11 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'ZeroPage/Login_Register.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,9 +13,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.orange,
-        fontFamily: 'Raleway',
       ),
-      home: const MyHomePage(title: 'PrabPluem Moblie Application'),
+      // home: const MyHomePage(title: 'PrabPluem Moblie Application'),
+      home: HomeScreen()
     );
   }
 }
