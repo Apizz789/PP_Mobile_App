@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'PrabPluem Moblie Application',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.pink,
       ),
       // home: const MyHomePage(title: 'PrabPluem Moblie Application'),
       home: HomeScreen()
@@ -52,11 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Image.asset(
-            //   "picture/pic1.jpg",
-            //   height: 300,
-            //   width: 300,
-            // ),
             CircleAvatar(
               backgroundImage: AssetImage('picture/pic1.jpg'),
               radius: 220,
