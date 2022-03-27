@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Model/Profile.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+
 // import 'package:form_field_validator/form_field_validator.dart';
 class RegisterScreen extends StatefulWidget {
   // const RegisterScreen({Key? key}) : super(key: key);
@@ -40,22 +42,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: 20,
                     ),
                     Text("*FristName: ", style: TextStyle(fontSize: 20)),
-                    TextFormField(),
+                    TextFormField(
+                      validator: RequiredValidator(
+                          errorText: "FristName Invaid Value"),
+                      keyboardType: TextInputType.name,
+                      onSaved: (String? fname) {
+                        profile.fname = fname!;
+                      },
+                    ),
                     SizedBox(
                       height: 20,
                     ),
                     Text("*LastName: ", style: TextStyle(fontSize: 20)),
-                    TextFormField(),
+                    TextFormField(
+                      validator:
+                          RequiredValidator(errorText: "LastName Invaid Value"),
+                      keyboardType: TextInputType.name,
+                      onSaved: (String? lname) {
+                        profile.lname = lname!;
+                      },
+                    ),
                     SizedBox(
                       height: 20,
                     ),
                     Text("*Telephone: ", style: TextStyle(fontSize: 20)),
-                    TextFormField(),
+                    TextFormField(
+                      validator: RequiredValidator(
+                          errorText: "Telephone Invaid Value"),
+                      keyboardType: TextInputType.phone,
+                      onSaved: (String? telephone) {
+                        profile.telephone = telephone!;
+                      },
+                    ),
                     SizedBox(
                       height: 20,
                     ),
                     Text("*Email: ", style: TextStyle(fontSize: 20)),
                     TextFormField(
+                      validator: MultiValidator([
+                        RequiredValidator(errorText: "Please Input the Email."),
+                        EmailValidator(errorText: "Email Invaid Value.")
+                      ]),
                       keyboardType: TextInputType.emailAddress,
                       onSaved: (String? email) {
                         profile.email = email!;
@@ -66,6 +93,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     Text("*Password: ", style: TextStyle(fontSize: 20)),
                     TextFormField(
+                      validator: MultiValidator([
+                        RequiredValidator(errorText: "Password Invaid Value"),
+                        MinLengthValidator(8,
+                            errorText:
+                                'password must be at least 8 digits long'),
+                        PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+                            errorText:
+                                'passwords must have at least one special character')
+                      ]),
                       obscureText: true,
                       onSaved: (String? password) {
                         profile.password = password!;
@@ -76,6 +112,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     Text("*Re-Password: ", style: TextStyle(fontSize: 20)),
                     TextFormField(
+                      validator: RequiredValidator(
+                          errorText: "RE Password Invaid Value"),
                       obscureText: true,
                       onSaved: (String? repassword) {
                         profile.repassword = repassword!;
@@ -95,10 +133,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               label: Text("Register Now !",
                                   style: TextStyle(fontSize: 20)),
                               onPressed: () {
-                                formKey.currentState?.save();
-                                print(
-                                    "email = ${profile.email} password = ${profile.password}");
-                                formKey.currentState?.reset();
+                                if (formKey.currentState!.validate()) {
+                                  formKey.currentState?.save();
+                                  print(
+                                      "fname = ${profile.fname} lname = ${profile.lname} telephone = ${profile.telephone} email = ${profile.email} password = ${profile.password}");
+                                  formKey.currentState?.reset();
+                                }
                               },
                             )),
                       ),
