@@ -13,7 +13,6 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             // padding: const EdgeInsets.fromLTRB(20,20,20,0),
-            
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -33,7 +32,6 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: SizedBox(
-                    
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton.icon(
