@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "51267998616",
-    "project_id": "ppmobileapp-51dc2",
-    "storage_bucket": "ppmobileapp-51dc2.appspot.com"
+    "project_number": "175997313333",
+    "project_id": "pp-mobileapp",
+    "storage_bucket": "pp-mobileapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:51267998616:android:2013bbd77a987aa0f011ed",
+        "mobilesdk_app_id": "1:175997313333:android:bc85ccb9569a0f858bac7c",
         "android_client_info": {
           "package_name": "com.example.flutter_application_1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "51267998616-1luvnjrm4lu8v1c9n064tk5cl0fhg18u.apps.googleusercontent.com",
+          "client_id": "175997313333-hucekbi4gsk4t8nou1nuarjlt1v3b2bt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDACiqbemsru7YzPGKd_XcyCyd1azBlRUQ"
+          "current_key": "AIzaSyAMdolIT7qkbofIAWC6DrIS065RX0yjrI4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "51267998616-1luvnjrm4lu8v1c9n064tk5cl0fhg18u.apps.googleusercontent.com",
+              "client_id": "175997313333-hucekbi4gsk4t8nou1nuarjlt1v3b2bt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Model/Profile.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
@@ -33,9 +36,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   title: Text("Error !"),
                 ),
                 body: Center(
-                  child: Text("${snapshot.error}"),
-                ));
-          }
+                  child:
+                  Text("Error ! \n ${snapshot.error}", style: TextStyle(fontSize: 30)),
+                ),);
+          };
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
                 appBar: AppBar(
@@ -154,12 +158,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       icon: Icon(Icons.add_box_rounded),
                                       label: Text("Register Now !",
                                           style: TextStyle(fontSize: 20)),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
-                                          print(
-                                              "fname = ${profile.fname} lname = ${profile.lname} telephone = ${profile.telephone} email = ${profile.email} password = ${profile.password}");
-                                          formKey.currentState?.reset();
+                                          try {
+                                          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                                            email: profile.email, 
+                                            password: profile.password
+                                            );
+                                          formKey.currentState?.reset(); 
+                                          }on FirebaseAuthException catch (e) {
+                                              print(e.message);
+                                          }
                                         }
                                       },
                                     )),
@@ -171,11 +181,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 )));
-          }
+          };
           return Scaffold(
-              body: Center(
-            child: CircularProgressIndicator(),
-          ));
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         });
   }
 }
