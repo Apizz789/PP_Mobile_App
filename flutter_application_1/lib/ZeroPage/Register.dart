@@ -23,7 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       email: "",
       password: "",
       repassword: "");
-  final Future<FirebaseApp> firebase = Firebase.initializeApp();
+  Future<FirebaseApp> get firebase => Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
