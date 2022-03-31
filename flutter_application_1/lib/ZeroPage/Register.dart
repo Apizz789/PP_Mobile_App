@@ -47,142 +47,170 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   title: Text("Register System"),
                 ),
                 body: Container(
+                    color: Color.fromARGB(255, 194, 184, 240),
                     child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: formKey,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("▰▱▰ Register ▱▰▱",
-                                style: TextStyle(fontSize: 40)),
-                            SizedBox(
-                              height: 20,
+                      padding: const EdgeInsets.all(20.0),
+                      child: SingleChildScrollView(
+                        child: Form(
+                          key: formKey,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                      bottom:
+                                          10, // Space between underline and text
+                                    ),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                      color: Colors.pink,
+                                      width: 5.0, // Underline thickness
+                                    ))),
+                                    child: Text(
+                                      "Register",
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("*First Name: ",
+                                    style: TextStyle(fontSize: 20)),
+                                TextFormField(
+                                  validator: RequiredValidator(
+                                      errorText: "FristName Invaid Value"),
+                                  keyboardType: TextInputType.name,
+                                  onSaved: (String? fname) {
+                                    profile.fname = fname!;
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("*Last Name: ",
+                                    style: TextStyle(fontSize: 20)),
+                                TextFormField(
+                                  validator: RequiredValidator(
+                                      errorText: "LastName Invaid Value"),
+                                  keyboardType: TextInputType.name,
+                                  onSaved: (String? lname) {
+                                    profile.lname = lname!;
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("*Telephone: ",
+                                    style: TextStyle(fontSize: 20)),
+                                TextFormField(
+                                  validator: RequiredValidator(
+                                      errorText: "Telephone Invaid Value"),
+                                  keyboardType: TextInputType.phone,
+                                  onSaved: (String? telephone) {
+                                    profile.telephone = telephone!;
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("*Email: ",
+                                    style: TextStyle(fontSize: 20)),
+                                TextFormField(
+                                  validator: MultiValidator([
+                                    RequiredValidator(
+                                        errorText: "Please Input the Email."),
+                                    EmailValidator(
+                                        errorText: "Email Invaid Value.")
+                                  ]),
+                                  keyboardType: TextInputType.emailAddress,
+                                  onSaved: (String? email) {
+                                    profile.email = email!;
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("*Password: ",
+                                    style: TextStyle(fontSize: 20)),
+                                TextFormField(
+                                  validator: MultiValidator([
+                                    RequiredValidator(
+                                        errorText: "Password Invaid Value"),
+                                    MinLengthValidator(8,
+                                        errorText:
+                                            'password must be at least 8 digits long'),
+                                    PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+                                        errorText:
+                                            'passwords must have at least one special character')
+                                  ]),
+                                  obscureText: true,
+                                  onSaved: (String? password) {
+                                    profile.password = password!;
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("*Re-Password: ",
+                                    style: TextStyle(fontSize: 20)),
+                                TextFormField(
+                                  validator: RequiredValidator(
+                                      errorText: "RE Password Invaid Value"),
+                                  obscureText: true,
+                                  onSaved: (String? repassword) {
+                                    profile.repassword = repassword!;
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20, 40, 20, 20),
+                                    child: SizedBox(
+                                        width: double.infinity,
+                                        height: 50,
+                                        child: ElevatedButton.icon(
+                                          icon: Icon(Icons.add_box_rounded),
+                                          label: Text("Register Now !",
+                                              style: TextStyle(fontSize: 20)),
+                                          onPressed: () async {
+                                            if (formKey.currentState!
+                                                .validate()) {
+                                              formKey.currentState?.save();
+                                              try {
+                                                await FirebaseAuth.instance
+                                                    .createUserWithEmailAndPassword(
+                                                  email: profile.email,
+                                                  password: profile.password,
+                                                );
+                                                formKey.currentState?.reset();
+                                              } on FirebaseAuthException catch (e) {
+                                                print(e.message);
+                                              }
+                                            }
+                                          },
+                                        )),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text("*FristName: ",
-                                style: TextStyle(fontSize: 20)),
-                            TextFormField(
-                              validator: RequiredValidator(
-                                  errorText: "FristName Invaid Value"),
-                              keyboardType: TextInputType.name,
-                              onSaved: (String? fname) {
-                                profile.fname = fname!;
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text("*LastName: ", style: TextStyle(fontSize: 20)),
-                            TextFormField(
-                              validator: RequiredValidator(
-                                  errorText: "LastName Invaid Value"),
-                              keyboardType: TextInputType.name,
-                              onSaved: (String? lname) {
-                                profile.lname = lname!;
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text("*Telephone: ",
-                                style: TextStyle(fontSize: 20)),
-                            TextFormField(
-                              validator: RequiredValidator(
-                                  errorText: "Telephone Invaid Value"),
-                              keyboardType: TextInputType.phone,
-                              onSaved: (String? telephone) {
-                                profile.telephone = telephone!;
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text("*Email: ", style: TextStyle(fontSize: 20)),
-                            TextFormField(
-                              validator: MultiValidator([
-                                RequiredValidator(
-                                    errorText: "Please Input the Email."),
-                                EmailValidator(errorText: "Email Invaid Value.")
-                              ]),
-                              keyboardType: TextInputType.emailAddress,
-                              onSaved: (String? email) {
-                                profile.email = email!;
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text("*Password: ", style: TextStyle(fontSize: 20)),
-                            TextFormField(
-                              validator: MultiValidator([
-                                RequiredValidator(
-                                    errorText: "Password Invaid Value"),
-                                MinLengthValidator(8,
-                                    errorText:
-                                        'password must be at least 8 digits long'),
-                                PatternValidator(r'(?=.*?[#?!@$%^&*-])',
-                                    errorText:
-                                        'passwords must have at least one special character')
-                              ]),
-                              obscureText: true,
-                              onSaved: (String? password) {
-                                profile.password = password!;
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text("*Re-Password: ",
-                                style: TextStyle(fontSize: 20)),
-                            TextFormField(
-                              validator: RequiredValidator(
-                                  errorText: "RE Password Invaid Value"),
-                              obscureText: true,
-                              onSaved: (String? repassword) {
-                                profile.repassword = repassword!;
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 40, 20, 20),
-                                child: SizedBox(
-                                    width: double.infinity,
-                                    height: 50,
-                                    child: ElevatedButton.icon(
-                                      icon: Icon(Icons.add_box_rounded),
-                                      label: Text("Register Now !",
-                                          style: TextStyle(fontSize: 20)),
-                                      onPressed: () async {
-                                        if (formKey.currentState!.validate()) {
-                                          formKey.currentState?.save();
-                                          try {
-                                            await FirebaseAuth.instance
-                                                .createUserWithEmailAndPassword(
-                                              email: profile.email,
-                                              password: profile.password,
-                                            );
-                                            formKey.currentState?.reset();
-                                          } on FirebaseAuthException catch (e) {
-                                            print(e.message);
-                                          }
-                                        }
-                                      },
-                                    )),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                )));
+                    )));
           }
           ;
           return Scaffold(
