@@ -10,24 +10,31 @@ class HomeScreen extends StatelessWidget {
         title: Text("Home_Login_Register"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: Column(
           // padding: const EdgeInsets.fromLTRB(20,20,20,0),
           children: [
             const CircleAvatar(
               backgroundImage: AssetImage('picture/pic1.jpg'),
-              radius: 220,
-            ),
-            const Text(
-              '\n\n\n\n\nPOP ME Please POP Me Now !!! Ahhhhhhhh',
-              style: TextStyle(height: 0, fontSize: 25),
-            ),
-            const Text(
-              'POP ME POP ME UP\n\n',
-              style: TextStyle(height: 0, fontSize: 20),
+              radius: 150,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+              child: const Text(
+                '[Test] 21 Days Challenge.',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, height: 0, fontSize: 25),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
+              child: const Text(
+                '<Please Select>\n\n',
+                style: TextStyle(height: 0, fontSize: 20),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
               child: SizedBox(
                 width: double.infinity,
                 height: 50,
