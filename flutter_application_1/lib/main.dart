@@ -3,34 +3,33 @@ import 'package:flutter/material.dart';
 import 'ZeroPage/Login_Register.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await Firebase.initializeApp();
 //   runApp(MyApp());
 // // }
-// void main() {
-//    runApp(MyApp());
-// }
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+void main() {
   runApp(MyApp());
 }
+
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   runApp(MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PrabPluem Moblie Application',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-      ),
-      // home: const MyHomePage(title: 'PrabPluem Moblie Application'),
-      home: HomeScreen()
-    );
+        title: 'PrabPluem Moblie Application',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.pink,
+        ),
+        // home: const MyHomePage(title: 'PrabPluem Moblie Application'),
+        home: HomeScreen());
   }
 }
 

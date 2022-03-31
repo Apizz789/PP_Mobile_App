@@ -23,7 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       email: "",
       password: "",
       repassword: "");
-  Future<FirebaseApp> get firebase => Firebase.initializeApp();
+  final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Scaffold(
-                appBar: AppBar(
-                  title: Text("Error !"),
-                ),
-                body: Center(
-                  child:
-                  Text("Error ! \n ${snapshot.error}", style: TextStyle(fontSize: 30)),
-                ),);
-          };
+              appBar: AppBar(
+                title: Text("Error !"),
+              ),
+              body: Center(
+                child: Text("Error ! \n ${snapshot.error}",
+                    style: TextStyle(fontSize: 30)),
+              ),
+            );
+          }
+          ;
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
                 appBar: AppBar(
@@ -56,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(" ▰▱▰ Register ▱▰▱",
+                            Text("▰▱▰ Register ▱▰▱",
                                 style: TextStyle(fontSize: 40)),
                             SizedBox(
                               height: 20,
@@ -162,13 +164,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         if (formKey.currentState!.validate()) {
                                           formKey.currentState?.save();
                                           try {
-                                          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                                            email: profile.email, 
-                                            password: profile.password
-                                            );
-                                          formKey.currentState?.reset(); 
-                                          }on FirebaseAuthException catch (e) {
-                                              print(e.message);
+                                            await FirebaseAuth.instance
+                                                .createUserWithEmailAndPassword(
+                                                    email: profile.email,
+                                                    password: profile.password);
+                                            formKey.currentState?.reset();
+                                          } on FirebaseAuthException catch (e) {
+                                            print(e.message);
                                           }
                                         }
                                       },
@@ -181,7 +183,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 )));
-          };
+          }
+          ;
           return Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
