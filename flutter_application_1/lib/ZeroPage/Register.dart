@@ -6,9 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Model/Profile.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
-// import 'package:form_field_validator/form_field_validator.dart';
 class RegisterScreen extends StatefulWidget {
-  // const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -166,8 +165,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           try {
                                             await FirebaseAuth.instance
                                                 .createUserWithEmailAndPassword(
-                                                    email: profile.email,
-                                                    password: profile.password);
+                                              email: profile.email,
+                                              password: profile.password,
+                                            );
                                             formKey.currentState?.reset();
                                           } on FirebaseAuthException catch (e) {
                                             print(e.message);
