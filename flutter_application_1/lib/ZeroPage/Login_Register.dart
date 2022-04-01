@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                     label: Text("Create New Account",
                         style: TextStyle(fontSize: 25)),
                     onPressed: () {
-                      Navigator.push(context,
+                      Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
                         return RegisterScreen();
                       }));
@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                     label: Text("Login With Your Account",
                         style: TextStyle(fontSize: 25)),
                     onPressed: () {
-                      Navigator.push(context,
+                      Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
                         return LoginScreen();
                       }));

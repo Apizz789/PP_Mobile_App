@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Model/Profile.dart';
 
 class LoginScreen extends StatefulWidget {
   // const LoginScreen({ Key? key }) : super(key: key);
@@ -8,6 +10,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
+  Profile profile = Profile(
+      fname: "",
+      lname: "",
+      telephone: "",
+      email: "",
+      password: "",
+      repassword: "");
+  final Future<FirebaseApp> firebase = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Model/Profile.dart';
+import 'package:flutter_application_1/ZeroPage/Login_Register.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -195,10 +197,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     .createUserWithEmailAndPassword(
                                                   email: profile.email,
                                                   password: profile.password,
-                                                );
-                                                formKey.currentState?.reset();
+                                                )
+                                                    .then((value) {
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Create Account Success",
+                                                      gravity:
+                                                          ToastGravity.CENTER);
+                                                  formKey.currentState?.reset();
+                                                  Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) {
+                                                    return HomeScreen();
+                                                  }));
+                                                });
                                               } on FirebaseAuthException catch (e) {
-                                                print(e.message);
+                                                print(e.code);
+                                                // print(e.message);
+                                                String message;
+                                                if (e.code ==
+                                                    'email-already-in-use') {
+                                                  message =
+                                                      "มีอีเมล์นี้ในระบบแล้ว โปรดใช้อีเมลล์อื่น";
+                                                } else if (e.code ==
+                                                    'weak-password') {
+                                                  message =
+                                                      "รหัสผ่านง่ายเกินไปอีสัส";
+                                                } else {
+                                                  message = e.message!;
+                                                }
+                                                Fluttertoast.showToast(
+                                                    msg: message,
+                                                    gravity:
+                                                        ToastGravity.CENTER);
                                               }
                                             }
                                           },
