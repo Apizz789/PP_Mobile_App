@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Expanded(child: Divider(color: Color.fromARGB(255, 3, 3, 3))),
           Padding(
               padding: EdgeInsets.all(6),
-              child: Text("Don’t Remember Your Account?",
+              child: Text("Forgot Your Account?",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black87))),
           Expanded(child: Divider(color: Color.fromARGB(255, 3, 3, 3))),
