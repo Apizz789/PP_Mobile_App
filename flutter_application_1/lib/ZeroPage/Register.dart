@@ -87,9 +87,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text("*First Name: ",
-                                    style: TextStyle(fontSize: 20)),
+                                // Text("*First Name: ",
+                                //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
+                                  decoration: InputDecoration(
+                                      labelText: "*First Name",
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: Icon(Icons.person)),
                                   validator: RequiredValidator(
                                       errorText: "FristName Invaid Value"),
                                   keyboardType: TextInputType.name,
@@ -100,9 +104,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text("*Last Name: ",
-                                    style: TextStyle(fontSize: 20)),
+                                // Text("*Last Name: ",
+                                //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
+                                  decoration: InputDecoration(
+                                      labelText: "*Last Name",
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: Icon(Icons.person)),
                                   validator: RequiredValidator(
                                       errorText: "LastName Invaid Value"),
                                   keyboardType: TextInputType.name,
@@ -113,9 +121,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text("*Telephone: ",
-                                    style: TextStyle(fontSize: 20)),
+                                // Text("*Telephone: ",
+                                //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
+                                  decoration: InputDecoration(
+                                      labelText: "*RePassword",
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: Icon(Icons.phone_outlined)),
                                   validator: RequiredValidator(
                                       errorText: "Telephone Invaid Value"),
                                   keyboardType: TextInputType.phone,
@@ -126,9 +138,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text("*Email: ",
-                                    style: TextStyle(fontSize: 20)),
+                                // Text("*Email: ",
+                                //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
+                                  decoration: InputDecoration(
+                                      labelText: "*Email",
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: Icon(Icons.email_outlined)),
                                   validator: MultiValidator([
                                     RequiredValidator(
                                         errorText: "Please Input the Email."),
@@ -143,9 +159,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text("*Password: ",
-                                    style: TextStyle(fontSize: 20)),
+                                // Text("*Password: ",
+                                //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
+                                  decoration: InputDecoration(
+                                      labelText: "*Password",
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: Icon(Icons.lock_outline)),
                                   validator: MultiValidator([
                                     RequiredValidator(
                                         errorText: "Password Invaid Value"),
@@ -154,7 +174,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             'password must be at least 8 digits long'),
                                     PatternValidator(r'(?=.*?[#?!@$%^&*-])',
                                         errorText:
-                                            'passwords must have at least one special character')
+                                            'passwords must have at least one special character'),
                                   ]),
                                   obscureText: true,
                                   onSaved: (String? password) {
@@ -164,82 +184,122 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text("*Re-Password: ",
-                                    style: TextStyle(fontSize: 20)),
+                                // Text("*Re-Password: ",
+                                //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
-                                  validator: RequiredValidator(
-                                      errorText: "RE Password Invaid Value"),
+                                  decoration: InputDecoration(
+                                      labelText: "*RePassword",
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: Icon(Icons.lock_reset)),
+                                  validator: MultiValidator([
+                                    RequiredValidator(
+                                        errorText: "RE Password Invaid Value"),
+                                  ]),
                                   obscureText: true,
                                   onSaved: (String? repassword) {
                                     profile.repassword = repassword!;
                                   },
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
+                                // SizedBox(
+                                //   height: 20,
+                                // ),
                                 Container(
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(
                                         20, 40, 20, 20),
                                     child: SizedBox(
-                                        width: double.infinity,
-                                        height: 50,
-                                        child: ElevatedButton.icon(
-                                          icon: Icon(Icons.add_box_rounded),
-                                          label: Text("Register Now !",
-                                              style: TextStyle(fontSize: 20)),
-                                          onPressed: () async {
-                                            if (formKey.currentState!
-                                                .validate()) {
-                                              formKey.currentState?.save();
-                                              try {
-                                                await FirebaseAuth.instance
-                                                    .createUserWithEmailAndPassword(
-                                                  email: profile.email,
-                                                  password: profile.password,
-                                                )
-                                                    .then((value) {
-                                                  Fluttertoast.showToast(
-                                                      msg:
-                                                          "Create Account Success",
-                                                      gravity:
-                                                          ToastGravity.CENTER);
-                                                  formKey.currentState?.reset();
-                                                  Navigator.pushReplacement(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) {
-                                                    return HomeScreen();
-                                                  }));
-                                                });
-                                              } on FirebaseAuthException catch (e) {
-                                                print(e.code);
-                                                // print(e.message);
-                                                String message;
-                                                if (e.code ==
-                                                    'email-already-in-use') {
-                                                  message =
-                                                      "This email already in use";
-                                                } else if (e.code ==
-                                                    'weak-password') {
-                                                  message = "Weak Password";
-                                                } else {
-                                                  message = e.message!;
-                                                }
+                                      width: double.infinity,
+                                      height: 50,
+                                      child: ElevatedButton.icon(
+                                        icon: Icon(Icons.add_box_rounded),
+                                        label: Text("Register Now !",
+                                            style: TextStyle(fontSize: 20)),
+                                        onPressed: () async {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            formKey.currentState?.save();
+                                            try {
+                                              await FirebaseAuth.instance
+                                                  .createUserWithEmailAndPassword(
+                                                email: profile.email,
+                                                password: profile.password,
+                                              )
+                                                  .then((value) {
                                                 Fluttertoast.showToast(
-                                                    msg: message,
+                                                    msg:
+                                                        "Create Account Success",
                                                     gravity:
                                                         ToastGravity.CENTER);
+                                                formKey.currentState?.reset();
+                                                Navigator.pushReplacement(
+                                                    context, MaterialPageRoute(
+                                                        builder: (context) {
+                                                  return HomeScreen();
+                                                }));
+                                              });
+                                            } on FirebaseAuthException catch (e) {
+                                              print(e.code);
+                                              // print(e.message);
+                                              String message;
+                                              if (e.code ==
+                                                  'email-already-in-use') {
+                                                message =
+                                                    "This email already in use";
+                                              } else if (e.code ==
+                                                  'weak-password') {
+                                                message = "Weak Password";
+                                              } else {
+                                                message = e.message!;
                                               }
+                                              Fluttertoast.showToast(
+                                                  msg: message,
+                                                  gravity: ToastGravity.CENTER);
                                             }
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(32.0),
-                                            ),
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(32.0),
                                           ),
-                                        )),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20, 0, 20, 20),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      height: 50,
+                                      child: OutlinedButton.icon(
+                                        icon: Icon(Icons.turn_left),
+                                        label: Text("Back to Home",
+                                            style: TextStyle(fontSize: 20)),
+                                        onPressed: () async {
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return HomeScreen();
+                                          }));
+                                        },
+                                        style: OutlinedButton.styleFrom(
+                                          primary:
+                                              Color.fromARGB(255, 176, 81, 235),
+                                          side: BorderSide(
+                                            width: 2.0,
+                                            color: Color.fromARGB(
+                                                255, 176, 81, 235),
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(32.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
