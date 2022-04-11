@@ -180,176 +180,174 @@ class _LoginScreenState extends State<LoginScreen> {
                 appBar: AppBar(
                   title: Text("Login System"),
                 ),
-                body: Container(
+                body: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
                     color: Color.fromARGB(255, 194, 184, 240),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: SingleChildScrollView(
-                        child: Form(
-                          key: formKey,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                    bottom:
+                                        10, // Space between underline and text
+                                  ),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                    color: Colors.pink,
+                                    width: 5.0, // Underline thickness
+                                  ))),
+                                  child: Text(
+                                    "Login",
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              // Text("*Email: ",
+                              //     style: TextStyle(fontSize: 20)),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                    labelText: "*Email",
+                                    border: OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.email_outlined)),
+                                validator: MultiValidator([
+                                  RequiredValidator(
+                                      errorText: "Please Input the Email."),
+                                  EmailValidator(
+                                      errorText: "Email Invaid Value.")
+                                ]),
+                                keyboardType: TextInputType.emailAddress,
+                                onSaved: (String? email) {
+                                  profile.email = email!;
+                                },
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              // Text("*Password: ",
+                              //     style: TextStyle(fontSize: 20)),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                    labelText: "*Password",
+                                    border: OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.lock_outline)),
+                                validator: MultiValidator([
+                                  RequiredValidator(
+                                      errorText: "Password Invaid Value"),
+                                  MinLengthValidator(8,
+                                      errorText:
+                                          'password must be at least 8 digits long'),
+                                  PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+                                      errorText:
+                                          'passwords must have at least one special character')
+                                ]),
+                                obscureText: true,
+                                onSaved: (String? password) {
+                                  profile.password = password!;
+                                },
+                              ),
+                              // SizedBox(
+                              //   height: 20,
+                              // ),
+                              Container(
+                                child: Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                      bottom:
-                                          10, // Space between underline and text
-                                    ),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                      color: Colors.pink,
-                                      width: 5.0, // Underline thickness
-                                    ))),
-                                    child: Text(
-                                      "Login",
-                                      style: TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                // Text("*Email: ",
-                                //     style: TextStyle(fontSize: 20)),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                      labelText: "*Email",
-                                      border: OutlineInputBorder(),
-                                      prefixIcon: Icon(Icons.email_outlined)),
-                                  validator: MultiValidator([
-                                    RequiredValidator(
-                                        errorText: "Please Input the Email."),
-                                    EmailValidator(
-                                        errorText: "Email Invaid Value.")
-                                  ]),
-                                  keyboardType: TextInputType.emailAddress,
-                                  onSaved: (String? email) {
-                                    profile.email = email!;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                // Text("*Password: ",
-                                //     style: TextStyle(fontSize: 20)),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                      labelText: "*Password",
-                                      border: OutlineInputBorder(),
-                                      prefixIcon: Icon(Icons.lock_outline)),
-                                  validator: MultiValidator([
-                                    RequiredValidator(
-                                        errorText: "Password Invaid Value"),
-                                    MinLengthValidator(8,
-                                        errorText:
-                                            'password must be at least 8 digits long'),
-                                    PatternValidator(r'(?=.*?[#?!@$%^&*-])',
-                                        errorText:
-                                            'passwords must have at least one special character')
-                                  ]),
-                                  obscureText: true,
-                                  onSaved: (String? password) {
-                                    profile.password = password!;
-                                  },
-                                ),
-                                // SizedBox(
-                                //   height: 20,
-                                // ),
-                                Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 40, 20, 20),
-                                    child: SizedBox(
-                                        width: double.infinity,
-                                        height: 50,
-                                        child: ElevatedButton.icon(
-                                          icon: Icon(Icons.add_box_rounded),
-                                          label: Text("Login Now !",
-                                              style: TextStyle(fontSize: 20)),
-                                          onPressed: () async {
-                                            if (formKey.currentState!
-                                                .validate()) {
-                                              formKey.currentState?.save();
-                                              try {
-                                                await FirebaseAuth.instance
-                                                    .signInWithEmailAndPassword(
-                                                        email: profile.email,
-                                                        password:
-                                                            profile.password)
-                                                    .then((value) {
-                                                  formKey.currentState?.reset();
-                                                  Navigator.pushReplacement(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) {
-                                                    return WelcomeScreen();
-                                                  }));
-                                                });
-                                              } on FirebaseAuthException catch (e) {
-                                                Fluttertoast.showToast(
-                                                    msg: e.code,
-                                                    gravity:
-                                                        ToastGravity.CENTER);
-                                              }
-                                            }
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(32.0),
-                                            ),
-                                          ),
-                                        )),
-                                  ),
-                                ),
-                                Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 0, 20, 20),
-                                    child: SizedBox(
+                                      const EdgeInsets.fromLTRB(20, 40, 20, 20),
+                                  child: SizedBox(
                                       width: double.infinity,
                                       height: 50,
-                                      child: OutlinedButton.icon(
-                                        icon: Icon(Icons.turn_left),
-                                        label: Text("Back to Home",
+                                      child: ElevatedButton.icon(
+                                        icon: Icon(Icons.add_box_rounded),
+                                        label: Text("Login Now !",
                                             style: TextStyle(fontSize: 20)),
                                         onPressed: () async {
-                                          Navigator.pushReplacement(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return HomeScreen();
-                                          }));
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            formKey.currentState?.save();
+                                            try {
+                                              await FirebaseAuth.instance
+                                                  .signInWithEmailAndPassword(
+                                                      email: profile.email,
+                                                      password:
+                                                          profile.password)
+                                                  .then((value) {
+                                                formKey.currentState?.reset();
+                                                Navigator.pushReplacement(
+                                                    context, MaterialPageRoute(
+                                                        builder: (context) {
+                                                  return WelcomeScreen();
+                                                }));
+                                              });
+                                            } on FirebaseAuthException catch (e) {
+                                              Fluttertoast.showToast(
+                                                  msg: e.code,
+                                                  gravity: ToastGravity.CENTER);
+                                            }
+                                          }
                                         },
-                                        style: OutlinedButton.styleFrom(
-                                          primary:
-                                              Color.fromARGB(255, 176, 81, 235),
-                                          side: BorderSide(
-                                            width: 2.0,
-                                            color: Color.fromARGB(
-                                                255, 176, 81, 235),
-                                          ),
+                                        style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(32.0),
                                           ),
                                         ),
+                                      )),
+                                ),
+                              ),
+                              Container(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                    child: OutlinedButton.icon(
+                                      icon: Icon(Icons.turn_left),
+                                      label: Text("Back to Home",
+                                          style: TextStyle(fontSize: 20)),
+                                      onPressed: () async {
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return HomeScreen();
+                                        }));
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        primary:
+                                            Color.fromARGB(255, 176, 81, 235),
+                                        side: BorderSide(
+                                          width: 2.0,
+                                          color:
+                                              Color.fromARGB(255, 176, 81, 235),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(32.0),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    )));
+                    ),
+                  ),
+                ));
           }
           ;
           return Scaffold(

@@ -125,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
                                   decoration: InputDecoration(
-                                      labelText: "*RePassword",
+                                      labelText: "*Telephone",
                                       border: OutlineInputBorder(),
                                       prefixIcon: Icon(Icons.phone_outlined)),
                                   validator: RequiredValidator(
