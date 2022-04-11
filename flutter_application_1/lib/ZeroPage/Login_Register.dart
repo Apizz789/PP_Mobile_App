@@ -42,14 +42,21 @@ class HomeScreen extends StatelessWidget {
                   height: 50,
                   child: ElevatedButton.icon(
                     icon: Icon(Icons.add),
-                    label: Text("Create New Account",
-                        style: TextStyle(fontSize: 25)),
+                    label: Text(
+                      "Create New Account",
+                      style: TextStyle(fontSize: 25),
+                    ),
                     onPressed: () {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
                         return RegisterScreen();
                       }));
                     },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -68,6 +75,11 @@ class HomeScreen extends StatelessWidget {
                         return LoginScreen();
                       }));
                     },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -219,11 +219,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 if (e.code ==
                                                     'email-already-in-use') {
                                                   message =
-                                                      "มีอีเมล์นี้ในระบบแล้ว โปรดใช้อีเมลล์อื่น";
+                                                      "This email already in use";
                                                 } else if (e.code ==
                                                     'weak-password') {
-                                                  message =
-                                                      "รหัสผ่านง่ายเกินไปอีสัส";
+                                                  message = "Weak Password";
                                                 } else {
                                                   message = e.message!;
                                                 }
@@ -234,6 +233,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               }
                                             }
                                           },
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(32.0),
+                                            ),
+                                          ),
                                         )),
                                   ),
                                 ),
