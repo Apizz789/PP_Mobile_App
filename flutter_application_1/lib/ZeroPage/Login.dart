@@ -216,9 +216,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                 ),
-                                Text("*Email: ",
-                                    style: TextStyle(fontSize: 20)),
+                                // Text("*Email: ",
+                                //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
+                                  decoration: InputDecoration(
+                                      labelText: "*Email",
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: Icon(Icons.email_outlined)),
                                   validator: MultiValidator([
                                     RequiredValidator(
                                         errorText: "Please Input the Email."),
@@ -233,9 +237,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text("*Password: ",
-                                    style: TextStyle(fontSize: 20)),
+                                // Text("*Password: ",
+                                //     style: TextStyle(fontSize: 20)),
                                 TextFormField(
+                                  decoration: InputDecoration(
+                                      labelText: "*Password",
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: Icon(Icons.lock_outline)),
                                   validator: MultiValidator([
                                     RequiredValidator(
                                         errorText: "Password Invaid Value"),
@@ -251,9 +259,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     profile.password = password!;
                                   },
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
+                                // SizedBox(
+                                //   height: 20,
+                                // ),
                                 Container(
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(
@@ -292,7 +300,48 @@ class _LoginScreenState extends State<LoginScreen> {
                                               }
                                             }
                                           },
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(32.0),
+                                            ),
+                                          ),
                                         )),
+                                  ),
+                                ),
+                                Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20, 0, 20, 20),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      height: 50,
+                                      child: OutlinedButton.icon(
+                                        icon: Icon(Icons.turn_left),
+                                        label: Text("Back to Home",
+                                            style: TextStyle(fontSize: 20)),
+                                        onPressed: () async {
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return HomeScreen();
+                                          }));
+                                        },
+                                        style: OutlinedButton.styleFrom(
+                                          primary:
+                                              Color.fromARGB(255, 176, 81, 235),
+                                          side: BorderSide(
+                                            width: 2.0,
+                                            color: Color.fromARGB(
+                                                255, 176, 81, 235),
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(32.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
